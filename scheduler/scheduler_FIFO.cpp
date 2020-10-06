@@ -10,16 +10,16 @@
 
 #include "../includes/scheduler_FIFO.h"
 
-	//override base class behaviour if necessary, otherwise call it
-	bool Scheduler_FIFO::time_to_switch_processes(int tick_count, PCB &p){
-		if (tick_count == 0){
-			return true;
-		}
-
+//override base class behaviour if necessary, otherwise call it
+bool Scheduler_FIFO::time_to_switch_processes(int tick_count, PCB &p) {
+	if (p.remaining_cpu_time <= 0) {
+		return true;
+	} else {
 		return false;
 	}
+}
 
-	//FIFO - not preemptive - no sorting needed
-	void Scheduler_FIFO::sort(){
+//FIFO - not preemptive - no sorting needed
+void Scheduler_FIFO::sort() {
 
-	}
+}

@@ -11,6 +11,7 @@
 //if nothing on CPU returns an uninitialized PCB
 PCB Dispatcher::get_from_CPU() {
 	is_valid_job_on_cpu = false;
+
 	return cpu->get_process_off_core();
 }
 

@@ -1,5 +1,5 @@
 /*
- * SchedulerSTRR.cpp
+ * Scheduler_FIFO.cpp
  *
  *  Created on: Sep 29, 2020
  *      Author: Tim Siltz
@@ -14,7 +14,9 @@
 bool Scheduler_FIFO::time_to_switch_processes(int tick_count, PCB &p) {
 	if (p.remaining_cpu_time <= 0) {
 		return true;
-	} else {
+	}
+
+	else {
 		return false;
 	}
 }

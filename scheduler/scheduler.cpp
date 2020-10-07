@@ -1,5 +1,5 @@
 /*
- * scheduler.cpp
+ * Scheduler.cpp
  *
  *  Created on: Sep 29, 2020
  *      Author: Tim Siltz
@@ -7,17 +7,18 @@
 
 #include "../includes/scheduler.h"
 
-using namespace std;
-
 //add a process, either a new one or one that
 //had been running on the CPU and has been preempted
 void Scheduler::add(PCB p) {
 	ready_q->push(p);
+	sort();
 }
 
 //get next process
 PCB Scheduler::getNext() {
 	PCB next = ready_q->front();
+	ready_q->pop();
+
 	return next;
 }
 
@@ -28,7 +29,9 @@ bool Scheduler::isEmpty() {
 		return true;
 	}
 
-	return false;
+	else {
+		return false;
+	}
 }
 
 //if process has completed (used all its remaining_cpu_time) or
@@ -38,12 +41,17 @@ bool Scheduler::isEmpty() {
 //true - switch processes
 //false - do not switch
 bool Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
-	time_slice = tick_count;
-	if (time_slice == 0 && preemptive) {
+	if (p.remaining_cpu_time <= 0) {
 		return true;
 	}
 
-	return false;
+	if (((tick_count - p.start_time) >= time_slice) && preemptive) {
+		return true;
+	}
+
+	else {
+		return false;
+	}
 }
 
 //sort ready_q based on the scheduler algorithm used whenever add(PCB p) is called

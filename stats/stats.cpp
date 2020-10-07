@@ -24,7 +24,7 @@ void Stats::showAllProcessInfo() {
 				<< vec->at(i).remaining_cpu_time << " arrived:"
 				<< vec->at(i).arrival_time << " started:"
 				<< vec->at(i).start_time << " finished:"
-				<< vec->at(i).finish_time;
+				<< vec->at(i).finish_time << std::endl;
 	}
 }
 
